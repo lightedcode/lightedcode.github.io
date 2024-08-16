@@ -1,46 +1,33 @@
 nav:
+  # the title displays in the upper left corner which won't change
   title: LightedCode
+  # the items displays in the upper right corner
   items:
-    - name: Archives
-      url: /archives
-    - name: Tags
-      url: /tags
-    - name: Categories
-      url: /categories
-    - name: About
-      url: /about
-    - name: <i class="si si-github"></i>
-      is_icon: true
-      url: https://github.com/lightedcode
-    - name: <i class="bi bi-search"></i>
-      is_icon: true
-      url: /search
+    # these items will display as a link
+    Archives: /archives
+    Categories: /categories
+    Tags: /tags
+    About: /about
+    # these will be automatically be an icon
+    GitHub: https://github.com/lightedcode
+    Search: /search
 
+# footer items
 footer:
-  - group_name: Blog
-    items:
-      - name: Home
-        url: /
-      - name: Archives
-        url: /archives
-      - name: Tags
-        url: /tags
-      - name: Categories
-        url: /categories
-      - name: About
-        url: /about
-  # - group_name: Projects
-  #   items:
-  #     - name: Hexo Theme Cupertino
-  #       url: https://github.com/MrWillCom/hexo-theme-cupertino
-  #     - name: Next Mastodon Gallery
-  #       url: https://github.com/MrWillCom/next-mastodon-gallery
-  - group_name: Me
-    items:
-      - name: GitHub
-        url: https://github.com/lightedcode
-      - name: Email
-        url: lightedcode@outlook.com
+  # the title
+  LightedCode:
+    # the items after the title, display as links
+    Blog: /
+    Archives: /archives
+    Tags: /tags
+    Categories: /categories
+    Search: /search
+    About: /about
+  # the title
+  Me:
+    # items
+    GitHub: https://github.com/lightedcode
+    Email: lightedcode@outlook.com
 
 color_scheme: [light/dark/auto]
 show_color_scheme_toggle: true
