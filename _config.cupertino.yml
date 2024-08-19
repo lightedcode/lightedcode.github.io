@@ -5,29 +5,25 @@ nav:
   items:
     # these items will display as a link
     Archives: /archives
-    Categories: /categories
-    Tags: /tags
     About: /about
-    # these will be automatically be an icon
     GitHub: https://github.com/lightedcode
     Search: /search
 
 # footer items
 footer:
-  # the title
-  LightedCode:
-    # the items after the title, display as links
+  Blog:
     Blog: /
     Archives: /archives
-    Tags: /tags
-    Categories: /categories
     Search: /search
     About: /about
-  # the title
+  Projects:
   Me:
-    # items
     GitHub: https://github.com/lightedcode
     Email: lightedcode@outlook.com
+    
+favicon: /image/favicon.png
+
+scroll_reveal: true
 
 color_scheme: [light/dark/auto]
 show_color_scheme_toggle: true
