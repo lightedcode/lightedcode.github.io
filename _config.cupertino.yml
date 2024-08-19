@@ -6,7 +6,7 @@ manifest: /manifest.json
 
 # [Open Graph Protocol](https://ogp.me/)
 og_enabled: true
-og_image: /favicon.png
+og_image: /image/favicon.png
 og:
   # customized og properties, which can replace the defaults
 
