@@ -1,32 +1,131 @@
-nav:
-  # the title displays in the upper left corner which won't change
-  title: LightedCode
-  # the items displays in the upper right corner
-  items:
-    # these items will display as a link
-    Archives: /archives
-    About: /about
-    GitHub: https://github.com/lightedcode
-    Search: /search
-
-# footer items
-footer:
-  Blog:
-    Blog: /
-    Archives: /archives
-    Search: /search
-    About: /about
-  Projects:
-  Me:
-    GitHub: https://github.com/lightedcode
-    Email: lightedcode@outlook.com
-    
+# path to your blog's icon
 favicon: /image/favicon.png
 
-scroll_reveal: true
+# path to manifest.json
+manifest: /manifest.json
 
-color_scheme: [light/dark/auto]
+# [Open Graph Protocol](https://ogp.me/)
+og_enabled: true
+og_image: /favicon.png
+og:
+  # customized og properties, which can replace the defaults
+
+# show excerpt on post list
+show_excerpt: false
+
+# default light/dark/auto color scheme
+color_scheme: auto
+
+# show color theme toggle in footer
 show_color_scheme_toggle: true
 
+# uppercase categories
+uppercase_categories: true
+
+# show post count on categories page
+categories_post_count: true
+
+# capitalize tag names on tags page
+capitalize_tags: false
+
+# add hashtag prefix before tags
+hashtag_prefix_before_tags: true
+
+# show post count on tags page
+tags_post_count: true
+
+# rainbow!
+rainbow_banner: true
+rainbow_banner_colors:
+  - '#e50000'
+  - '#ff8d00'
+  - '#ffee00'
+  - '#008121'
+  - '#004cff'
+  - '#760188'
+# when to show rainbow banner: auto/always
+rainbow_banner_shown: auto
+# Pride Month by default
+rainbow_banner_month: 6
+
+# table of contents
+toc: true
+toc_max_depth: 2
+
+scroll_reveal: true
+scroll_reveal_query: .scroll-reveal, .post-list-item, .card, .content p img, .content .block-large img
+scroll_reveal_disappear: false
+
+nav:
+  title: LightedCode
+  items:
+    - name: Archives
+      url: /archives
+    - name: About
+      url: /about
+    - name: <i class="si si-github"></i>
+      is_icon: true
+      url: https://github.com/lightedcode
+    - name: <i class="bi bi-search"></i>
+      is_icon: true
+      url: /search
+
+footer:
+  - group_name: Blog
+    items:
+      - name: Home
+        url: /
+      - name: Archives
+        url: /archives
+      - name: Tags
+        url: /tags
+      - name: Categories
+        url: /categories
+      - name: Search
+        url: /search
+  - group_name: Me
+    items:
+      - name: GitHub
+        url: https://github.com/lightedcode
+      - name: Email
+        url: mailto:lightedcode@outlook.com
+
+# footer extra description
+# footer_extra_description: something will be shown at the bottom of the footer
+
+license: CC BY-NC 4.0
+license_link: https://creativecommons.org/licenses/by-nc/4.0
+
+# search
+# based on [hexo-generator-search](https://github.com/wzpan/hexo-generator-search)
 search: true
 search_path: search.json
+
+# icons
+simple_icons: true
+# Theme Cupertino requires Bootstrap Icons to display some icons of the UI, don't turn it off unless you know what exactly you're doing.
+bootstrap_icons: true
+
+view_transition: true
+
+# date display format
+# refer to https://momentjs.com/docs/#/displaying/format/
+date_display_format: MMMM D, YYYY
+
+# CDN
+cdn:
+  template: https://unpkg.com/:package@:version/:file
+  replacements:
+    package: :package
+    version: :version
+    file: :file
+
+hero_exit_while_scrolling:
+  enabled: true
+  blur_filter: false
+
+builtin_components:
+  card: true
+  button: true
+  badge: true
+  utilities: true
