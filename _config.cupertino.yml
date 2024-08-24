@@ -61,6 +61,10 @@ nav:
   items:
     - name: Archives
       url: /archives
+    - name: Categories
+      url: /categories
+    - name: Tags
+      url: /tags
     - name: About
       url: /about
     - name: <i class="si si-github"></i>
