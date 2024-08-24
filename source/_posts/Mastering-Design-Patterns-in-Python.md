@@ -130,7 +130,6 @@ print(advanced_computer)
 - 原型模式的核心在于提供一个接口，用于复制现有对象。通常，这个接口会包含一个 clone 方法，负责返回对象的副本。
 - 用途：对于一些创建实例开销比较高的地方可以用原型模式
 
-
 ```python
 import copy
 
@@ -195,8 +194,6 @@ print(singleton2.value)  # 输出: First Instance
 print(singleton1 is singleton2)  # 输出: True
 ```
 
-
-
 ## 对象池模式（Pool）：预先分配同一类型的一组实例
 
 ## 惰性计算模式（Lazing evaluation）:延迟计算
@@ -212,6 +209,7 @@ print(singleton1 is singleton2)  # 输出: True
 2. **延迟初始化**：可以延迟目标对象的创建，直到真正需要时才创建它，节省资源。
 3. **日志记录**：可以在访问目标对象时添加日志记录功能。
 4. **缓存**：可以在代理中缓存目标对象的结果，减少对目标对象的调用次数。
+
 ```python
 class RealSubject:
     def request(self):
@@ -261,3 +259,153 @@ print(proxy.request())
 ## Model-View-Controller（MVC）：解耦展示逻辑和业务逻辑
 
 # 行为型模式
+## 迭代器模式（Iterator）：通过统一的接口迭代对象
+- Python内置对迭代器模式的支持
+- 可以用for遍历各种Iterable的类型
+- python里可以实现__next__,__iter__实现迭代器
+
+```python
+# 自定义栈
+from collections import deque
+class Stack(object):
+    def __init__(self):
+        self._deque = deque()
+    
+    def push(self, value):
+        return self._deque.append(value)
+    
+    def pop(self):
+        return self._deque.pop()
+    
+    def empty(self):
+        return len(self._deque) == 0
+    
+    ## 实现迭代__iter__方法
+    def __iter__(self):
+        res = []
+        for i in self._deque:
+            res.append(i)
+        for i in reversed(res)
+            yield i
+
+s = Stack()
+s.push(1)
+s.push(2)
+for i in s:
+    print(i)
+# 打印2,1
+```
+## 观察者模式（Observer）：对象发生改变的时候，观察者执行相应的动作
+- 发布订阅是一种最常见的实现方式，用于解耦逻辑
+- 可以通过回调等方式实现，当事件发生时，调用相应的函数
+
+```python
+# 发布订阅模式
+# 发布者
+class Publisher:
+    def __init__(self):
+        self.observers = []  # 观察者
+
+    def add(self, observer):
+        if observer not in self.observers:
+            self.observers.append(observer)
+        else:
+            print("Failed to add: {}".format(observer))
+
+    def remove(self, observer):
+        try:
+            self.observers.remove(observer)
+        except ValueError as e:
+            print('Failed to remove: {}'.format(observer))
+
+    def notify(self):  # 调用观察者的回调
+        [o.notify_by(self) for o in self.observers]
+
+
+class Formatter(Publisher):
+    def __init__(self, name):
+        super().__init__()
+        self.name = name
+        self._data = 0
+
+    @property
+    def data(self):
+        return self._data
+
+    @data.setter
+    def data(self, new_value):
+        self._data = int(new_value)
+        # data在被合法赋值后执行notify
+        self.notify()
+
+
+# 订阅者
+class BinaryFormatter:
+    def notify_by(self, publisher):
+        print("{}: '{}' has now bin data = {}".format(type(self).__name__, publisher.name, bin(publisher.data)))
+
+
+if __name__ == "__main__":
+    # 发布者
+    df = Formatter('formatter')
+    # 订阅者
+    bf = BinaryFormatter()
+    # 添加订阅者
+    df.add(bf)
+    # 设置的时候调用订阅者的notify_by
+    df.data = 3
+```
+
+## 策略模式（Stratrgy）:针对不同规模输入使用不同的策略
+- 根据不同的输入采取不同的策略
+- 对外暴露统一的接口，内部采取不同的计算
+
+```python
+from abc import ABC, abstractmethod
+
+# 策略接口（Strategy）使用抽象基类（ABC）
+class PaymentStrategy(ABC):
+    @abstractmethod
+    def pay(self, amount):
+        pass
+
+# 具体策略类（Concrete Strategy）
+class CreditCardPayment(PaymentStrategy):
+    def __init__(self, card_number):
+        self.card_number = card_number
+
+    def pay(self, amount):
+        return f"Paid {amount} using Credit Card {self.card_number}."
+
+class PayPalPayment(PaymentStrategy):
+    def __init__(self, email):
+        self.email = email
+
+    def pay(self, amount):
+        return f"Paid {amount} using PayPal account {self.email}."
+# 上下文类（Context）
+class PaymentContext:
+    def __init__(self, strategy: PaymentStrategy):
+        self._strategy = strategy
+
+    def set_strategy(self, strategy: PaymentStrategy):
+        self._strategy = strategy
+
+    def execute_payment(self, amount):
+        return self._strategy.pay(amount)
+
+# 测试策略模式
+credit_card_payment = CreditCardPayment("1234-5678-9876-5432")
+paypal_payment = PayPalPayment("user@example.com")
+
+context = PaymentContext(credit_card_payment)
+print(context.execute_payment(100))  # 输出: Paid 100 using Credit Card 1234-5678-9876-5432.
+
+context.set_strategy(paypal_payment)
+print(context.execute_payment(200))  # 输出: Paid 200 using PayPal account user@example.com.
+```
+### 使用场景
+
+- **需要动态选择算法**：在运行时需要动态选择不同的算法或行为。
+- **避免条件判断**：通过策略模式，可以避免在客户端代码中使用大量的条件判断语句。
+- **算法独立变化**：算法的实现细节独立于客户端代码，可以独立地进行修改和扩展。

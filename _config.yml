@@ -105,3 +105,8 @@ theme: cupertino
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+# Search
+search:
+  path: search.json
+  content: false
