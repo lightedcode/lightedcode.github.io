@@ -6,6 +6,7 @@ cover_image_alt: AI Logo Linux
 tags:
     - Linux
     - OS
+    - Interview
 categories:
     - Code
 ---
