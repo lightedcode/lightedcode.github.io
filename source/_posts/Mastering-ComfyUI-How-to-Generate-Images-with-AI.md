@@ -11,4 +11,4 @@ categories:
 ---
 ## 前言
 开个新坑，记录一下学习ComfyUI的过程
-![Image001](001.png)
+![Image001](MC-001.png)
