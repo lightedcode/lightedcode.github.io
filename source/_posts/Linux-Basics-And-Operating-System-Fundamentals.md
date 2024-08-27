@@ -1,8 +1,8 @@
 ---
 title: Linux Basics And Operating System Fundamentals
 date: 2024-08-02 21:19:49
-cover_image:
-cover_image_alt:
+cover_image: /image/cover004.png
+cover_image_alt: AI Logo Linux
 tags:
     - Linux
     - OS
