@@ -243,8 +243,153 @@ process.join()
 - **分段**：将内存划分为不同大小的段，更符合程序逻辑结构，灵活性更高，但容易产生外部碎片，管理复杂。
 
 ## 虚拟内存
+- 通过把一部分暂时不用的内存信息放到硬盘上
+  - 局部性原理（时间局部性和空间局部性），程序运行的时候只有部分必要的信息装入内存
+  - 系统似乎提供了比实际内存大得多的容量，成为虚拟内存
+### 内存抖动（颠簸）
+
+- 频繁的页调度，进程不断产生缺页终端
+- 置换一个页，有不断再次需要这个页
+- 运行程序太多；页面替换策略不好。终止进程或者增加物理内存
+
+## Python的垃圾回收机制（GC）原理
+
+Python的垃圾回收机制主要通过引用计数和循环垃圾回收两个机制来管理内存。
+
+### 1. 引用计数（Reference Counting）
+
+引用计数是Python内存管理的基础机制。每个对象都有一个引用计数器，用于记录有多少个引用指向该对象。当一个对象的引用计数变为零时，表示没有任何引用指向该对象，Python会立即回收该对象所占用的内存。
+
+**优点**：
+- 简单高效，能及时回收不再使用的对象。
+- 内存释放的时机是确定的，当引用计数变为零时立即释放。
+
+**缺点**：
+- 无法处理循环引用（即两个或多个对象相互引用，形成一个闭环）。
+
+```python
+# 循环引用
+# 创建两个列表对象
+a = [1]  # a -> [1] ref = 1
+b = [2]  # b -> [2] ref = 1
+
+# 让 a 引用 b
+a.append(b)  # a -> [1, b] ref = 1, b -> [2] ref = 2
+
+# 让 b 引用 a
+b.append(a)  # b -> [2, a] ref = 2, a -> [1, b] ref = 2
+
+# 删除引用
+del a  # b -> [2, a] ref = 1, a -> [1, b] ref = 1
+del b  # ref = 0, ref = 0
+# 此时，a 和 b 形成了一个循环引用，无法通过引用计数回收
+```
+
+### 2. 循环垃圾回收（Cycle Garbage Collection）
+
+为了处理循环引用问题，Python引入了循环垃圾回收机制。Python的垃圾回收器会定期检查对象之间的引用关系，找出无法通过引用计数机制回收的循环引用对象，并将其回收。
+
+Python的循环垃圾回收器主要通过分代回收的方式来提高效率。对象根据其“年龄”被分为三代：
+- **第0代**：新创建的对象。
+- **第1代**：经过一次垃圾回收后仍然存活的对象。
+- **第2代**：经过多次垃圾回收后仍然存活的对象。
+
+垃圾回收器会频繁地检查和回收第0代对象，较少检查和回收第1代对象，更少检查和回收第2代对象。这种分代回收的策略基于“年轻对象更可能是垃圾”的假设，从而提高了垃圾回收的效率。
+
+**工作流程**：
+1. **标记阶段**：垃圾回收器遍历所有对象，标记出哪些对象是可达的（仍在使用的）。
+2. **清除阶段**：回收所有未标记的对象（不可达的对象）。
+
+### 3. 手动垃圾回收
+
+虽然Python的垃圾回收机制通常是自动进行的，但也可以通过`gc`模块手动控制垃圾回收。例如，可以使用以下方法：
+
+- `gc.collect()`: 手动触发垃圾回收。
+- `gc.disable()`: 禁用自动垃圾回收。
+- `gc.enable()`: 启用自动垃圾回收。
+- `gc.get_count()`: 获取当前的引用计数情况。
+
+```python
+import gc
+
+# 手动触发垃圾回收
+gc.collect()
+
+# 禁用自动垃圾回收
+gc.disable()
+
+# 启用自动垃圾回收
+gc.enable()
+
+# 获取当前的引用计数情况
+print(gc.get_count())
+```
+
+### 总结
+
+Python的垃圾回收机制主要依赖于引用计数和循环垃圾回收。引用计数负责大部分对象的内存管理，但无法处理循环引用问题；循环垃圾回收则弥补了这一不足，通过分代回收提高了效率。Python还允许开发者通过`gc`模块手动控制垃圾回收行为。
+
+## 多线程代码练习
+```python
+
+import threading
+import queue
+import requests
+
+"""
+定义一个多线程爬虫类
+1. 可传入最大线程数和需要爬取的网址列表
+2. 可以继承类处理response
+"""
+
+class ThreadCrawler:
+    def __init__(self, max_threads=3, urls):
+        self.max_threads = max_threads
+        self.urls = urls
+        self.queue = queue.Queue()
+        self.results = []
+        self.lock = threading.Lock()
+        for url in urls:
+            self.queue.put(url)
+
+    def fetch_url(self):
+        while not self.queue.empty():
+            url = self.queue.get()
+            try:
+                response = requests.get(url)
+                self.process_response(response)
+            except Exception as e:
+                print(f"Failed to fetch {url}: {e}")
+            finally:
+                self.queue.task_done()
+
+    def process_response(self, response):
+        with self.lock:
+            self.results.append(response)
+            print(f"Fetched {response.url} with status {response.status_code}")
+
+    def run(self):
+        threads = []
+        for _ in range(self.max_threads):
+            thread = threading.Thread(target=self.fetch_url)
+            thread.start()
+            threads.append(thread)
+        for thread in threads:
+            thread.join()
 
 
+if __name__ == "__main__":
+    urls = [
+        "http://example.com",
+        "http://example.org",
+        "http://example.net",
+    ]
+    crawler = ThreadCrawler(max_threads=3, urls=urls)
+    crawler.run()
+    for response in crawler.results:
+        print(response.text[:100])
+
+```
 # 参考
 [一文带你了解，虚拟内存、内存分页、分段、段页式内存管理](https://github.com/0voice/kernel_memory_management/blob/main/%E2%9C%8D%20%E6%96%87%E7%AB%A0/%E4%B8%80%E6%96%87%E5%B8%A6%E4%BD%A0%E4%BA%86%E8%A7%A3%EF%BC%8C%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E3%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%A1%B5%E3%80%81%E5%88%86%E6%AE%B5%E3%80%81%E6%AE%B5%E9%A1%B5%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.md)
 
