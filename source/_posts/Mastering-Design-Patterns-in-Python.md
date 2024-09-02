@@ -6,6 +6,7 @@ cover_image_alt: AI LOGO
 tags:
     - Design Patterns
     - Algorithm
+    - Interview
 categories:
     - Code
 ---
