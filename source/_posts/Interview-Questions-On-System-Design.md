@@ -1,6 +1,6 @@
 ---
 title: Interview Questions On System Design
-date: 2024-09-01 10:30:40
+date: 2024-08-05 10:30:40
 cover_image:
 cover_image_alt:
 tags:
