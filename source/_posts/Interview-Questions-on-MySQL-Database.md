@@ -225,6 +225,56 @@ select a.id as a_id, b.id as b_id, a.val as a_val, b.val as b_val from A full jo
 |  2   | NULL |  a    | NULL  |
 | NULL |  3   | NULL  |  b   |
 
+## HAVING子句
+
+在 SQL 中，`HAVING` 子句用于过滤分组后的结果。`HAVING` 子句通常与聚合函数一起使用，例如 `COUNT`、`SUM`、`AVG` 等，以过滤出符合条件的分组。
+
+为了更好地理解 `HAVING` 子句的用法，假设我们有一张学生成绩表 `student_scores`，并且我们想找出至少有两门课程分数超过 80 分的学生。那么可以这样写：
+
+```sql
+SELECT
+    student_name
+FROM
+    student_scores
+WHERE
+    score > 80
+GROUP BY
+    student_name
+HAVING
+    COUNT(*) >= 2;
+```
+
+这个查询的逻辑是：
+
+1. `WHERE score > 80` 过滤掉所有分数不超过 80 分的记录。
+2. `GROUP BY student_name` 将剩余的记录按学生名字分组。
+3. `HAVING COUNT(*) >= 2` 只保留那些至少有两门课程分数超过 80 分的学生。
+
+```sql
+SELECT
+    student_name
+FROM
+    student_scores
+GROUP BY
+    student_name
+HAVING
+    MIN(score) > 80;
+```
+
+1. **`SELECT student_name`**:
+   - 选择学生的名字。
+
+2. **`FROM student_scores`**:
+   - 从 `student_scores` 表中选择数据。
+
+3. **`GROUP BY student_name`**:
+   - 按学生名字分组，这意味着每个学生将成为一个分组。
+
+4. **`HAVING MIN(score) > 80`**:
+   - `HAVING` 子句用于过滤分组后的结果。
+   - `MIN(score)` 计算每个学生所有课程中的最低分数。
+   - `MIN(score) > 80` 这个条件确保每个学生的所有课程中最低分数都超过 80 分。
+
 # Redis
 
 ## 为什么要使用缓存？使用场景

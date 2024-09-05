@@ -111,6 +111,64 @@ charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
 ## 3. 算法和接口
 
+### 设计原理
+
+令牌桶算法（Token Bucket Algorithm）是通过控制请求的速率来限制流量的。其基本原理如下：
+
+1. **令牌桶**：系统维护一个令牌桶，桶内可以容纳一定数量的令牌。
+2. **生成令牌**：令牌按照固定的速率生成，并放入桶中。如果桶满了，新生成的令牌会被丢弃。
+3. **请求令牌**：每个请求到达时，需要从桶中取出一个令牌。如果桶中有令牌，则请求被允许通过；如果没有令牌，则请求被拒绝或排队等待。
+
+### 实现步骤
+
+1. **初始化令牌桶**：
+   - 设置桶的容量 \( C \) 和令牌生成速率 \( R \)（每秒生成的令牌数）。
+   - 初始化桶内的令牌数为 0。
+
+2. **生成令牌**：
+   - 定时任务（如每秒执行一次）向桶中添加令牌，添加数量为 \( R \)。
+   - 如果桶中的令牌数达到或超过容量 \( C \)，则保持为 \( C \)。
+
+3. **请求处理**：
+   - 当请求到达时，检查桶中是否有令牌。
+   - 如果有令牌，则从桶中取出一个令牌，允许请求通过。
+   - 如果没有令牌，则拒绝请求或将请求放入等待队列。
+
+### 示例代码
+
+```python
+import time
+import threading
+
+class TokenBucket:
+    def __init__(self, capacity, rate):
+        self.tokens = capacity
+        self.capacity = capacity
+        self.rate = rate
+        self.last_generate_time = time.time()
+        self.lock = threading.Lock()
+    def fill_bucket(self):
+        now = time.time()
+        self.tokens = min(self.capacity, self.tokens + (now - self.last_generate_time) * self.rate)
+        self.last_generate_time = now
+    def get_token(self):
+        with self.lock:
+            self.fill_bucket()
+            if self.tokens > 0:
+                print("获取到token")
+                self.tokens -= 1
+            else:
+                print("未获取到token")
+
+if __name__ == '__main__':
+    tb = TokenBucket(10, 3)
+    
+    for i in range(20):
+        tb.get_token()
+        time.sleep(0.1)
+
+```
+
 
 
 
