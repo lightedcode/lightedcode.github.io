@@ -28,6 +28,7 @@ categories:
     - 非重复读（Nonrepeatable Read）：一个事务重复读两次得到不同的结果
     - 脏读（Dirty Read）：一个输入读取到另一个事务没有提交的修改
     - 修改丢失（Lost Update）：并发写入造成其中一些修改丢失
+
 ### 事务的隔离级别
 1. 读未提交（Read Uncommitted）：别的事务可以读取到未提交的改变
 2. 读已提交（Read Committed）：只能读取已提交的数据
@@ -299,7 +300,7 @@ HAVING
 - Hash：ziplist或者hashtable
 - Set: intset 或者hashtable
 - Sorted Set：skiplist跳表
-
+h
 #### Skiplist跳表
 
 ![](001.png)
