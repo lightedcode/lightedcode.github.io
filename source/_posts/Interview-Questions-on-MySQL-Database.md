@@ -3,6 +3,7 @@ title: Interview Questions on MySQL Database
 date: 2024-08-04 22:12:36
 cover_image: /image/cover006.png
 cover_image_alt:
+thumbnail: /image/cover006.png
 tags:
     - Interview
     - Database

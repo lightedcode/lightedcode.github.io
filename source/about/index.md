@@ -17,5 +17,5 @@ Here, you'll find a mix of:
 
 **Tech Behind the Blog:**
 - **Framework:** [Hexo](https://hexo.io/)
-- **Theme:** [Cupertino](https://github.com/MrWillCom/hexo-theme-cupertino)
+- **Theme:** [Hexo-theme-Redefine](https://github.com/EvanNotFound/hexo-theme-redefine)
 - **Deployment:** GitHub Actions and GitHub Pages

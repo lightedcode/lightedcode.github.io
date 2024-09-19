@@ -3,6 +3,7 @@ title: Mastering Design Patterns in Python
 date: 2024-08-01 17:51:21
 cover_image: /image/cover003.png
 cover_image_alt: AI LOGO
+thumbnail: /image/cover003.png
 tags:
     - Design Patterns
     - Algorithm

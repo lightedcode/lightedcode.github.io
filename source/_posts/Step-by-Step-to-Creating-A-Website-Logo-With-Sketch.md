@@ -3,6 +3,7 @@ title: Step-by-Step to Creating A Website Logo With Sketch
 date: 2024-08-15 18:30:50
 cover_image: /image/cover001.png
 cover_image_alt: Create A Logo With Sketch
+thumbnail: /image/cover001.png
 tags:
     - UI Design
     - ICON
