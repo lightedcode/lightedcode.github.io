@@ -3,6 +3,7 @@ title: Interview Questions on Network Protocols and Web Frameworks
 date: 2024-08-03 22:31:04
 cover_image: /image/cover005.png
 cover_image_alt: AI LOGO Network
+thumbnail: /image/cover005.png
 tags:
     - Network
     - Interview
