@@ -271,6 +271,47 @@ class Solution:
         return slow
 # @lc code=end
 ```
+# [数组-80-删除有序数组中的重复项 II](https://leetcode.cn/problems/remove-duplicates-from-sorted-array-ii/description/)
+
+{% notel default fa-info 题目描述 %}
+给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使得出现次数超过两次的元素只出现两次 ，返回删除后数组的新长度。
+不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+
+输入：nums = [1,1,1,2,2,3]
+输出：5, nums = [1,1,2,2,3]
+解释：函数应返回新长度 length = 5, 并且原数组的前五个元素被修改为 1, 1, 2, 2, 3。 不需要考虑数组中超出新长度后面的元素。
+{% endnotel %}
+
+```python
+#
+# @lc app=leetcode.cn id=80 lang=python3
+#
+# [80] 删除有序数组中的重复项 II
+#
+"""
+双指针
+从第三个元素开始检查，遇到和slow-2下标不同的数时，替换slow并将slow+1
+167/167 cases passed (31 ms)
+Your runtime beats 94.78 % of python3 submissions
+Your memory usage beats 94.1 % of python3 submissions (16.3 MB)
+"""
+
+# @lc code=start
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        if len(nums) <= 2:
+            return len(nums)
+
+        slow = 2  # 从第三个元素开始检查
+        for fast in range(2, len(nums)):
+            if nums[fast] != nums[slow - 2]:
+                nums[slow] = nums[fast]
+                slow += 1
+        return slow
+# @lc code=end
+```
+
+
 # [链表-141-环形链表](https://leetcode.cn/problems/linked-list-cycle/discussion/)
 
 {% notel default fa-info 题目描述 %}
