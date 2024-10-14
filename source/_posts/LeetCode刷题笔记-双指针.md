@@ -15,7 +15,7 @@ categories:
 # 背景
 双指针法基本都是应用在数组，字符串与链表的题目上，通过两个指针减少算法复杂度。将部分题目和解法放在下面，作为回顾
 
-# [字符串-09-回文数](https://leetcode.cn/problems/palindrome-number/description/)
+# [09-字符串-回文数](https://leetcode.cn/problems/palindrome-number/description/)
 
 {% notel default fa-info 题目描述 %}
 给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。
@@ -78,7 +78,7 @@ class Solution:
 # @lc code=end
 ```
 
-# [链表-19-删除链表的倒数第 N 个结点](https://leetcode.cn/problems/remove-nth-node-from-end-of-list/discussion/)
+# [19-链表-删除链表的倒数第 N 个结点](https://leetcode.cn/problems/remove-nth-node-from-end-of-list/discussion/)
 
 {% notel default fa-info 题目描述 %}
 给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
@@ -139,7 +139,7 @@ class Solution:
 # @lc code=end
 ```
 
-# [链表-24-两两交换链表中的节点](https://leetcode.cn/problems/swap-nodes-in-pairs/discussion/)
+# [24-链表-两两交换链表中的节点](https://leetcode.cn/problems/swap-nodes-in-pairs/discussion/)
 
 {% notel default fa-info 题目描述 %}
 给你一个链表，两两交换其中相邻的节点，并返回交换后链表的头节点。你必须在不修改节点内部的值的情况下完成本题（即，只能进行节点交换）。
@@ -200,7 +200,7 @@ class Solution:
 # @lc code=end
 ```
 
-# [数组-26-删除有序数组中的重复项]()
+# [26-数组-删除有序数组中的重复项]()
 
 {% notel default fa-info 题目描述 %}
 给你一个 非严格递增排列 的数组 nums ，请你 原地 删除重复出现的元素，使每个元素 只出现一次 ，返回删除后数组的新长度。元素的 相对顺序 应该保持 一致 。然后返回 nums 中唯一元素的个数。
@@ -237,7 +237,7 @@ class Solution:
 # @lc code=end
 ```
 
-# [数组-27-移除元素](https://leetcode.cn/problems/remove-element/discussion/)
+# [27-数组-移除元素](https://leetcode.cn/problems/remove-element/discussion/)
 
 {% notel default fa-info 题目描述 %}
 给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素。元素的顺序可能发生改变。然后返回 nums 中与 val 不同的元素的数量。
@@ -271,7 +271,7 @@ class Solution:
         return slow
 # @lc code=end
 ```
-# [数组-80-删除有序数组中的重复项 II](https://leetcode.cn/problems/remove-duplicates-from-sorted-array-ii/description/)
+# [80-数组-删除有序数组中的重复项 II](https://leetcode.cn/problems/remove-duplicates-from-sorted-array-ii/description/)
 
 {% notel default fa-info 题目描述 %}
 给你一个有序数组 nums ，请你 原地 删除重复出现的元素，使得出现次数超过两次的元素只出现两次 ，返回删除后数组的新长度。
@@ -312,7 +312,7 @@ class Solution:
 ```
 
 
-# [链表-141-环形链表](https://leetcode.cn/problems/linked-list-cycle/discussion/)
+# [141-链表-环形链表](https://leetcode.cn/problems/linked-list-cycle/discussion/)
 
 {% notel default fa-info 题目描述 %}
 给你一个链表的头节点 head ，判断链表中是否有环。
@@ -350,7 +350,7 @@ class Solution:
         
 # @lc code=end
 ```
-# [链表-142-环形链表II](https://leetcode.cn/problems/linked-list-cycle-ii/description/)
+# [142-链表-环形链表II](https://leetcode.cn/problems/linked-list-cycle-ii/description/)
 {% notel default fa-info 题目描述 %}
 给定一个链表的头节点  head ，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。
 
@@ -395,7 +395,7 @@ class Solution:
 # @lc code=end
 ```
 
-# [链表-234-回文链表](https://leetcode.cn/problems/palindrome-linked-list/description/)
+# [234-链表-回文链表](https://leetcode.cn/problems/palindrome-linked-list/description/)
 
 {% notel default fa-info 题目描述 %}
 给你一个单链表的头节点 head ，请你判断该链表是否为回文链表。如果是，返回 true ；否则，返回 false 。
@@ -547,7 +547,7 @@ class Solution3:
 # @lc code=end
 ```
 
-# [字符串-344-反转字符串](https://leetcode.cn/problems/reverse-string/description/)
+# [344-字符串-反转字符串](https://leetcode.cn/problems/reverse-string/description/)
 
 {% notel default fa-info 题目描述 %}
 编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 s 的形式给出。
@@ -589,7 +589,7 @@ class Solution:
             right -= 1
 # @lc code=end
 ```
-# [链表-876-链表的中间结点](https://leetcode.cn/problems/middle-of-the-linked-list/description/)
+# [876-链表-链表的中间结点](https://leetcode.cn/problems/middle-of-the-linked-list/description/)
 
 {% notel default fa-info 题目描述 %}
 给你单链表的头结点 head ，请你找出并返回链表的中间结点。
@@ -626,7 +626,7 @@ class Solution:
 
 ```
 
-# [数组-977-有序数组的平方](https://leetcode.cn/problems/squares-of-a-sorted-array/description/)
+# [977-数组-有序数组的平方](https://leetcode.cn/problems/squares-of-a-sorted-array/description/)
 {% notel default fa-info 题目描述 %}
 给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序。
 示例 1：
