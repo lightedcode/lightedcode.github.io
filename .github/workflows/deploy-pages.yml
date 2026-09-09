@@ -19,7 +19,8 @@ jobs:
         with:
           # Examples: 20, 18.19, >=16.20.2, lts/Iron, lts/Hydrogen, *, latest, current, node
           # Ref: https://github.com/actions/setup-node#supported-version-syntax
-          node-version: "20.11.0"
+          # Hexo 8 requires Node >= 20.19.0 (ESM deps break on older 20.x)
+          node-version: "20.19.0"
       - name: Cache NPM dependencies
         uses: actions/cache@v4
         with:
